@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ ($page_title)?CRUDBooster::getSetting('appname').': '.strip_tags($page_title):"Admin Area" }}</title>
+    <title>{{CRUDBooster::getSetting('appname')==='CRUDBooster'?'Company':CRUDBooster::getSetting('appname')}} ::   {{ strip_tags($page_title)}}</title>
     @include('crudbooster::_admin_template.meta')
     @include('crudbooster::_admin_template.css')
 

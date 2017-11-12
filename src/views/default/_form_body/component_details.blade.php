@@ -1,5 +1,5 @@
 <?php
-$file_location = base_path('vendor/davemusic/crudbooster-custom/src/views/default/type_components/'.$type.'/component_detail.blade.php');
+$file_location = base_path('vendor/dev-roshan/crudbooster-custom/src/views/default/type_components/'.$type.'/component_detail.blade.php');
 $user_location = resource_path('views/vendor/crudbooster/type_components/'.$type.'/component_detail.blade.php');
 ?>
 

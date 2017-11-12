@@ -1169,6 +1169,6 @@ class CRUDBooster
 
     public static function componentsTypePath()
     {
-        return base_path('vendor/crocodicstudio/crudbooster/src/views/default/type_components/');
+        return base_path('vendor/dev-roshan/crudbooster-custom/src/views/default/type_components/');
     }
 }

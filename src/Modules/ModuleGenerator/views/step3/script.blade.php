@@ -204,7 +204,6 @@
         var handleOptions = null;
 
         $('#modal-options .btn-save-option').click(function () {
-                debugger;
             var name = handleOptions.parent().parent().parent().parent().find('input.name').val();
             var close = true;
             $('#modal-options .modal-body').find('input,select,textarea').each(function () {
@@ -244,7 +243,6 @@
 
 
         $(document).on('click', '.btn-options', function () {
-            debugger;
             handleOptions = $(this);
             var input = handleOptions.parent().parent().find('input');
             var type = input.val();
