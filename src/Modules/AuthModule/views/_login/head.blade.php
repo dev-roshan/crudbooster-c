@@ -1,5 +1,5 @@
 <meta charset="UTF-8">
-<title>{{cbTrans("page_title_login")}} : {{CRUDBooster::getSetting('appname')}}</title>
+<title>{{cbTrans("page_title_login")}} : {{CRUDBooster::getSetting('appname')==='CRUDBooster'?'Company':CRUDBooster::getSetting('appname')}}</title>
 <meta name='generator' content='CRUDBooster'/>
 <meta name='robots' content='noindex,nofollow'/>
 <link rel="shortcut icon"
