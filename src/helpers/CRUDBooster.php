@@ -12,7 +12,7 @@ use Validator;
 class CRUDBooster  {		
 	
 	public static function typepath() {
-		$url='vendor/davemusic/crudbooster-custom/src/views/default/type_components/';
+		$url='vendor/crudbooster/custom/src/views/default/type_components/';
 		return $url;
 	}
 		public static function getSetting($name){	

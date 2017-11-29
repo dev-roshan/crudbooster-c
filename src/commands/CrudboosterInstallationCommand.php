@@ -238,6 +238,6 @@ class CrudboosterInstallationCommand extends Command
         }
     }
     private function copyBaseCBController(){
-        copy('vendor/davemusic/crudbooster-custom/src/controllers/BaseCBController.php', 'app/Http/Controllers/BaseCBController.php');
+        copy('vendor/crudbooster/custom/src/controllers/BaseCBController.php', 'app/Http/Controllers/BaseCBController.php');
     }
 }
