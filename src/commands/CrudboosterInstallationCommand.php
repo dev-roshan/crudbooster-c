@@ -31,6 +31,8 @@ class CrudboosterInstallationCommand extends Command
      */
     public function handle()
     {
+        //copying basecbcontroller
+        copy('vendor/crudbooster/custom/src/controllers/BaseCBController.php', 'app/Http/Controllers/BaseCBController.php');
         $this->printHeader();
         $this->checkRequirements();
         $this->info('Installing: ');
@@ -42,8 +44,6 @@ class CrudboosterInstallationCommand extends Command
         $this->symlinkForUpload();
         //Crate symlink for assets
         $this->symlinkForAsset();
-
-        $this->copyBaseCBController();
       
 		if($this->confirm('Do you have setting the database configuration at .env ?')) {
             $this->installCrudbooster();
@@ -236,8 +236,5 @@ class CrudboosterInstallationCommand extends Command
             $this->info('Please set public/vendor directory to writable 0777');
             exit;
         }
-    }
-    private function copyBaseCBController(){
-        copy('vendor/crudbooster/custom/src/controllers/BaseCBController.php', 'app/Http/Controllers/BaseCBController.php');
     }
 }
