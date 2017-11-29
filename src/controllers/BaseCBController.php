@@ -90,15 +90,9 @@ class BaseCBController extends Controller {
     public $is_cbLoaded         = false;
 
     public function addCommonAssets(){
-        array_push($this->load_css, asset("css/custom.css?".now()));
-        // array_push($this->load_css, asset("css/alertify.css"));
-        // array_push($this->load_css, asset("css/dashboard.css?".now()));
-        // // array_push($this->load_css, asset("css/bootstrap-responsive.min.css"));
-        array_push($this->load_css, asset("css/nepali.datepicker.v2.2.min.css"));
-        array_push($this->load_js, asset("js/nepali.datepicker.v2.2.min.js"));
-        array_push($this->load_js, asset("js/nepalidateConvertorCustom.js"));
-        // array_push($this->load_js, asset("js/alertify.js"));
-        // array_push($this->load_js, asset("js/moment.min.js"));
+        // array_push($this->load_css, asset("css/custom.css?".now()));
+        // array_push($this->load_js, asset("js/nepali.datepicker.v2.2.min.js"));
+     
     }
 
     protected function getAlias(){
