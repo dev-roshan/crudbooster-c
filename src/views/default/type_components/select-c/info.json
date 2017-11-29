@@ -5,7 +5,8 @@
 		"requiredOne":{
 			"dataenum":"value1;value2;value3",
 			"datatable":"table_name,column_name",
-			"dataquery":"string sql query. Response should label & value"
+			"dataquery":"string sql query. Response should label & value",
+			"cmp-ratio":"4:12:12"
 		},
 		"optional":{
 			"style":"string inline stylesheet",

@@ -7,7 +7,9 @@
 			"help":"string help-block",
 			"placeholder":"string placeholder",
 			"readonly":"boolean",
-			"disabled":"boolean"			
+			"disabled":"boolean",
+			"cmp-ratio":"4:12:12"
+						
 		},
 		"required": {
 			"html":"string html"

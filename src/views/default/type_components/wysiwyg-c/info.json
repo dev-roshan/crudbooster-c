@@ -6,7 +6,8 @@
 			"style":"string inline stylesheet",
 		"help":"string help-block",		
 		"readonly":"boolean",
-		"disabled":"boolean"	
+		"disabled":"boolean",
+		"cmp-ratio":"4:12:12"	
 		}
 		
 	}

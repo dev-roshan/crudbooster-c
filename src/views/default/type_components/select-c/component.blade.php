@@ -4,6 +4,7 @@
 		$parent_select 	= (count(explode(",",$form['parent_select'])) > 1)?explode(",",$form['parent_select']):$form['parent_select'];
 		$parent 		= is_array($parent_select)?$parent_select[0]:$parent_select;
 		$add_field	 	= is_array($parent_select)?$parent_select[1]:'';
+		
 	?>
 	@push('bottom')
 	<script type="text/javascript">
@@ -15,6 +16,7 @@
 				var fk_value = $(this).val();
 				var datatable = "{{$form['datatable']}}".split(',');
 				@if(!empty($add_field))
+				fk_name="{{$add_field}}";
 				var add_field = ($("#{{$add_field}}").val())?$("#{{$add_field}}").val():"";
 				@endif
 				var datatableWhere = "{{$form['datatable_where']}}";

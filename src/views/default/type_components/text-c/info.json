@@ -9,7 +9,8 @@
 		"placeholder":"string placeholder",
 		"readonly":"boolean",
 		"disabled":"boolean",
-		"value":"string"
+		"value":"string",
+		"cmp-ratio":"4:12:12"
 		}
 		
 	}

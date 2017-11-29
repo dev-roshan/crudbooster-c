@@ -5,7 +5,8 @@
 		"optional":{
 			"style":"string inline stylesheet",
 			"help":"string help-block",
-			"datatable_where":"string where condition"			
+			"datatable_where":"string where condition",
+			"cmp-ratio":"4:12:12"			
 		},
 		"requiredOne": {
 			"dataenum":"value1;value2;value3",

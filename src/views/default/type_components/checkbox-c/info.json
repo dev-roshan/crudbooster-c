@@ -7,7 +7,8 @@
 			"style":"string inline stylesheet",
 			"help":"string help-block",
 			"datatable_where":"string where condition",
-			"relationship_table":"A many to many relationship table. (datatable is needed)"	
+			"relationship_table":"A many to many relationship table. (datatable is needed)",
+			"cmp-ratio":"4:12:12"
 		},
 		"requiredOne": {
 			"dataenum":"value1;value2",
