@@ -106,14 +106,6 @@ class BaseCBController extends Controller {
         return $this->alias;
     }
 
-    // public function getDashboard()
-    // {
-    //     if(Session::get("is_applicant") == 1)
-    //     {
-    //        return  $this->is_dashboard = true;
-    //     }
-    //     return  $this->is_dashboard;
-    // }
 
     public function cbLoader() {
         if($this->is_cbLoaded)
@@ -1264,12 +1256,9 @@ class BaseCBController extends Controller {
         $page_title 	 = trans("crudbooster.edit_data_page_title",['module'=>CRUDBooster::getCurrentModule()->name,'name'=>$row->{$this->title_field}]);
         $command 		 = 'edit';
         Session::put('current_row_id',$id);
-        $isApplicant=false;
-        if(Session::get('is_applicant') == 1){
-            $isApplicant=true;
-        }
+      
         //return view('crudbooster::default.form',compact('id','row','page_menu','page_title','command'));
-        return view($this->getEdit_view,compact('id','row','page_menu','page_title','command','isApplicant'));
+        return view($this->getEdit_view,compact('id','row','page_menu','page_title','command'));
 
     }
 
