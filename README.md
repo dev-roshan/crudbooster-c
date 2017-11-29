@@ -1,109 +1,72 @@
-# CRUDBOOSTER - Laravel CRUD Generator
-[![Code Climate](https://codeclimate.com/github/crocodic-studio/crudbooster/badges/gpa.svg)](https://codeclimate.com/github/crocodic-studio/crudbooster)
-[![Latest Stable Version](https://poser.pugx.org/crocodicstudio/crudbooster/v/stable)](https://packagist.org/packages/crocodicstudio/crudbooster)
-[![Total Downloads](https://poser.pugx.org/crocodicstudio/crudbooster/downloads)](https://packagist.org/packages/crocodicstudio/crudbooster)
-[![Latest Unstable Version](https://poser.pugx.org/crocodicstudio/crudbooster/v/unstable)](https://packagist.org/packages/crocodicstudio/crudbooster)
-[![License](https://poser.pugx.org/crocodicstudio/crudbooster/license)](https://packagist.org/packages/crocodicstudio/crudbooster)
-[![Monthly Downloads](https://poser.pugx.org/crocodicstudio/crudbooster/d/monthly)](https://packagist.org/packages/crocodicstudio/crudbooster)
-[![Daily Downloads](https://poser.pugx.org/crocodicstudio/crudbooster/d/daily)](https://packagist.org/packages/crocodicstudio/crudbooster)
+# Welcome To CRUDBooster
 
-> Laravel CRUD Generator, Make a Web Application Just In Minutes, Even With Less Code and fewer Steps !
+CRUDBooster is CRUD Generator for laravel, with the most important features web application development. It's easy, flexible, and powerful.
 
-[<img src="http://crudbooster.com/CrudBooster_Banner.png"/>](http://crudbooster.com) 
+## System Requirement and Basic Technical Knowledge
+- Web Server as:
+  - Apache 2.4.x or higher with rewrite engine on (mod_rewrite)  
+  - Nginx 1.11.x or higher
+- Database that laravel supports, actually can be:
+  - MySQL
+  - Postgres
+  - SQLite
+  - SQL Server
+- Composer
+- Laravel 5.3.x or higher
+- Php 5.6.x or higher and the extensions:
+  - Mcrypt
+  - OpenSSL
+  - Mbstring
+  - Tokenizer
+  - FileInfo
 
-# DISCUSSION MIGRATE
-### http://crudbooster.com/stack
+## How To Install
+1. Open the terminal, navigate to your project directory.
+```php
+$ composer require "crocodicstudio/custom:dev-master"
+```
 
-CRUDBooster is a Laravel CRUD Generator. With a new concept of scaffolding, very easy for the beginner and professional. It's easy to use, easy to custom, and very flexible. Don't limit your mind, CRUDBooster gives us a true flexibility to develop an app. You can utilize its built in CRUD Generator or even you just need for your master data only. (LARAVEL KNOWLEDGE IS A MUST)
+2. Add the following class, to "providers" array in the file **config/app.php**
+```php
+crocodicstudio\crudbooster\CRUDBoosterServiceProvider::class,
+```
 
-## Features 
-- CRUD Generator With GUI
-- Rich HTML input types
-- API Generator
-- API Documentation Generator
-- Export & Import Data In Each Module
-- Advanced Filter & Sorter
-- Graphic / Statistic Designer
-- Multiple Privileges
-- Responsive Template By AdminLTE
-- Many more...
+3. Setting the database configuration, open .env file at project root directory
+```
+DB_DATABASE=**your_db_name**
+DB_USERNAME=**your_db_user**
+DB_PASSWORD=**password**
+```
 
-## Flow Diagram Of CRUDBooster
-![image](https://cloud.githubusercontent.com/assets/6733315/24070665/78aba9ee-0bf4-11e7-82dd-96dde90e8c67.png)
+4. Run the following command at the terminal
+```php
+$ php artisan crudbooster:install
+```
 
-## Documentation
-[Documentation in English](./docs/en/index.md)
+## How To Update
+- Open the terminal, navigate to your project directory.
+```php
+$ composer require crocodicstudio/crudbooster
+```
+- Run the following command at the terminal
+```php
+$ php artisan crudbooster:update
+```
 
-## Follow Our Social Media
-- Youtube Channel: https://www.youtube.com/channel/UCgOJR3khWEykIBBR8vAGtcA
-- Facebook: https://www.facebook.com/crudbooster
-- Instagram: "crudbooster"
-- Twitter: https://twitter.com/boostercrud
-- Website: http://crudbooster.com
+## If you have an issue about broken file upload then you need to run:
+```php
+$ php artisan crudbooster:update
+```
 
-## Support
-All issues, bugs or help are in one place, in [CRUDBoster Issues](https://github.com/crocodic-studio/crudbooster/issues). To request help or report a problem, centralize everything in the [CRUDBoster Issues](https://github.com/crocodic-studio/crudbooster/issues). Follow the guidelines in the "Using CRUDBooster Issues Page" session.
+## Backend URL
+```php
+/admin/login
+```
+- default email : admin@crudbooster.com
+- default password : 123456
 
-## Important Note To Developer
-Dear Developer, you are not end new user, to use CRUDBooster, **Laravel knowledge** is a must!, CRUDBooster is just an additional package **Laravel Framework** to help use more efficient in development. If you dont have a laravel knowledge, so nightmare will come to you :D. We can't help you as you want in every issues especially basic issues of web development instead you can find out in internet (stackoverflow or any other)
+## What's Next
+- [How To Create A Module (CRUD)](./how-to-create-module.md)
 
-## Contribution
-
-All ways to contribute are welcome. 
-
-#### Money donation
-
-You can make a monetary contribution to the project. Help with whatever value you want or judge. To do this, just click the button below in the Donation session.
-
-#### Changing the source code
-
-To contribute directly to the source code:
-
-- Fork the repository
-- Clone your forked repo to your machine ```git clone https://github.com/YOUR_USERNAME/CRUDBooster.git```
-- Make your changes, corrections, or improvements
-- Make the commits to your local machine
-- Push the commits to your forked repo on github 
-- Create a pull request
-
-#### Attention
-
-- When you submit your code, you are automatically accepting that it will not be exclusively yours, and that CRUDBooster may use it in any context, as it deems appropriate.
-- If you use a third-party code, it must be licensed as open-source.
-- Contributions will only be accepted through a Pull Request.
-- Your contribution can not contain execution errors.
-
-## Using GitHub Issues Page
-
-Do you have any doubt? Are you having some difficulty? Did you find a translation error, a bug, or any problem? Before posting, search on [CRUDBoster Issues](https://github.com/crocodic-studio/crudbooster/issues)  and make sure if anyone has not reported the same or similar problem.
-
-To post you should detail the most about what happened. Specify in detail:
-
-- Operating system (name, version and architecture)
-- Web server (name, version and architecture)
-- Browser (name, version and architecture)
-- CRUDBooster version
-- Laravel version
-- What is the problem?
-- How should it happen? What was the expected behavior?
-- Tell how to reproduce the problem step by step
-- If possible, take screenshots or send snippets of code
-
-No one is obligated to understand you. Then explain your problem with clarity, detail and precision. Make yourself understandable. Once the problem is resolved, remember to thank those who helped and close the issue. 
-
-If there is no interaction for a long period of time, it will be assumed that it has been resolved or that it is irrelevant, and may be closed without notice. Feel free to reopen it if you think it is really necessary.
-
-## Donation
-<a href='https://pledgie.com/campaigns/33366'><img alt='Click here to lend your support to: CRUDBooster is Laravel CRUD Generator and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/33366.png?skin_name=chrome' border='0' ></a>
-
-## Credits
-1. Laravel Export HTML to Excel by [Maatwebsite](https://github.com/Maatwebsite/Laravel-Excel)
-2. Laravel DOM PDF by [Barryvdh](https://github.com/barryvdh/laravel-dompdf)
-3. Laravel Widgetize [ImanGhafoori](https://github.com/imanghafoori1/laravel-widgetize)
-4. Admin Theme by [AdminLTE Almsaeed Studio](https://almsaeedstudio.com/preview)
-5. Laravel Framework by [Taylor Otwell](https://github.com/laravel/laravel)
-6. Thanks To All [Developers](https://github.com/crocodic-studio/crudbooster/graphs/contributors)
-7. Thanks To All [Funders](https://pledgie.com/campaigns/33366#donors)
-
-## License 
-CRUDBooster is under [MIT License](https://opensource.org/licenses/MIT)
+## Table Of Contents
+- [Back To Index](./index.md)
