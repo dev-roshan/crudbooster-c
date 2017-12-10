@@ -686,9 +686,16 @@ class CRUDBooster  {
 			$table = CRUDBooster::parseSqlTable($table);
 
 			if(!$table['table']) throw new \Exception("parseSqlTable can't determine the table");							
-			$query = "select * from information_schema.COLUMNS where TABLE_SCHEMA = '$table[database]' and TABLE_NAME = '$table[table]' and COLUMN_KEY = 'PRI'";
+			$query="";
+			if(config('database.default')=='pgsql'){
+                $query = "select * from information_schema.key_column_usage WHERE TABLE_NAME = '$table[table]'";
+				} 
+			else {
+				$query = "select * from information_schema.COLUMNS where TABLE_SCHEMA = '$table[database]' and TABLE_NAME = '$table[table]' and COLUMN_KEY = 'PRI'";
+			}
 			$keys = DB::select($query);
 			$primary_key = $keys[0]->COLUMN_NAME;
+			if($primary_key === null) $primary_key = $keys[0]->column_name;
 			if($primary_key) {				
 				self::putCache('table_'.$table,'primary_key',$primary_key);
 				return $primary_key;
@@ -813,24 +820,42 @@ class CRUDBooster  {
 	        $tables = array();
 	        $multiple_db = config('crudbooster.MULTIPLE_DATABASE_MODULE');
 	        $multiple_db = ($multiple_db)?$multiple_db:array();
-	        $db_database = config('crudbooster.MAIN_DB_DATABASE');
-
-	        if($multiple_db) {
-	        	try {	            
-	        		$multiple_db[] = config('crudbooster.MAIN_DB_DATABASE');
-	        		$query_table_schema = implode("','",$multiple_db);
-			    	$tables = DB::select("SELECT CONCAT(TABLE_SCHEMA,'.',TABLE_NAME) FROM INFORMATION_SCHEMA.Tables WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA != 'mysql' AND TABLE_SCHEMA != 'performance_schema' AND TABLE_SCHEMA != 'information_schema' AND TABLE_SCHEMA != 'phpmyadmin' AND TABLE_SCHEMA IN ('$query_table_schema')");				    				
-		        }catch(\Exception $e) {
-			    	$tables = [];
-		        }
-	        }else{
-	        	try{	        		
-		        	$tables = DB::select("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.Tables WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = '".$db_database."'");		        	
-	        	}catch(\Exception $e) {
-	        		$tables = [];
-	        	}
-	        }	        
-	        
+			$db_database = config('crudbooster.MAIN_DB_DATABASE');
+			$db_schema   = config('crudbooster.MAIN_DB_SCHEMA');
+			if(config('database.default')=='pgsql'){
+				if($multiple_db) {
+					try {
+						$multiple_db[] = config('crudbooster.MAIN_DB_DATABASE');
+						$query_table_schema = implode("','",$multiple_db);
+						$tables = DB::select("SELECT CONCAT(TABLE_SCHEMA,'.',TABLE_NAME) FROM INFORMATION_SCHEMA.Tables WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA != 'mysql' AND TABLE_SCHEMA != 'performance_schema' AND TABLE_SCHEMA != 'information_schema' AND TABLE_SCHEMA != 'phpmyadmin' AND TABLE_SCHEMA IN ('$query_table_schema')");
+					}catch(\Exception $e) {
+						$tables = [];
+					}
+				}else{
+					try{
+						$tables = DB::select("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.Tables WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = '".$db_schema."'");
+					}catch(\Exception $e) {
+						$tables = [];
+					}
+				}
+			}
+			else{
+					if($multiple_db) {
+						try {	            
+							$multiple_db[] = config('crudbooster.MAIN_DB_DATABASE');
+							$query_table_schema = implode("','",$multiple_db);
+							$tables = DB::select("SELECT CONCAT(TABLE_SCHEMA,'.',TABLE_NAME) FROM INFORMATION_SCHEMA.Tables WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA != 'mysql' AND TABLE_SCHEMA != 'performance_schema' AND TABLE_SCHEMA != 'information_schema' AND TABLE_SCHEMA != 'phpmyadmin' AND TABLE_SCHEMA IN ('$query_table_schema')");				    				
+						}catch(\Exception $e) {
+							$tables = [];
+						}
+					}else{
+						try{	        		
+							$tables = DB::select("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.Tables WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = '".$db_database."'");		        	
+						}catch(\Exception $e) {
+							$tables = [];
+						}
+					}	        
+				}
 
 	        return $tables;
 	    }
