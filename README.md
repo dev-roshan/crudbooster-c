@@ -43,26 +43,13 @@ DB_PASSWORD=**password**
 $ php artisan crudbooster:install
 ```
 
-## How To Update
-- Open the terminal, navigate to your project directory.
-```php
-$ composer require crocodicstudio/crudbooster
-```
-- Run the following command at the terminal
-```php
-$ php artisan crudbooster:update
-```
 
-## If you have an issue about broken file upload then you need to run:
-```php
-$ php artisan crudbooster:update
-```
 
 ## Backend URL
 ```php
 /admin/login
 ```
-- default email : admin@crudbooster.com
+- default email : admin@admin.com
 - default password : 123456
 
 ## What's Next
