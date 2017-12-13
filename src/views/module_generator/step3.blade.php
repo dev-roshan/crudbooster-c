@@ -54,7 +54,6 @@
 <script type="text/javascript">
 	var columns = {!! json_encode($columns) !!};
 	var types = {!! json_encode($types) !!};
-    debugger;
 	var validation_rules = ['required','string','integer','double','image','date','numeric','alpha_spaces'];
 	function ucwords (str) {
         return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
@@ -430,6 +429,7 @@
         	</thead>
         	<tbody>
                 <?php $index = 0;?>
+                @if($cb_form)
         		@foreach($cb_form as $form)
         		<tr>
         			<td><input type='text' value='{{$form["label"]}}' placeholder="Input field label" onclick='showColumnSuggest(this)' onkeyup="showColumnSuggestLike(this)" class='form-control labels' name='label[]'/></td>
@@ -537,6 +537,114 @@
         		</tr>
                 <?php $index++;?>
         		@endforeach
+                @else
+                @for($x=1;$x<count($columns);$x++)
+        		<tr>
+        			<td><input type='text' value='{{$columns[$x]}}' placeholder="Input field label" onclick='showColumnSuggest(this)' onkeyup="showColumnSuggestLike(this)" class='form-control labels' name='label[]'/></td>
+        			<td><input type='text' value='{{$columns[$x]}}' placeholder="Input field name" onclick='showNameSuggest(this)' onkeyup="showNameSuggestLike(this)" class='form-control name' name='name[]'/></td>
+        			<td><input type='text' value='{{$form["type"]?:"text"}}' placeholder="Input field type" onclick='showTypeSuggest(this)' onkeyup="showTypeSuggestLike(this)" class='form-control type' name='type[]'/></td>        			
+        			<td><input type='text' value='{{$form["validation"]}}' class='form-control validation' onclick="showValidationSuggest(this)" onkeyup="showValidationSuggestLike(this)" name='validation[]' value='required' placeholder='Enter Laravel Validation'/></td>        			
+        			<td>     			
+        			<select class='form-control width' name='width[]'>
+        				@for($i=10;$i>=1;$i--)        					
+        					<option {{ ($form['width'] == "col-sm-$i")?"selected":"" }} value='col-sm-{{$i}}'>{{$i}}</option>
+        				@endfor
+        			</select>
+        			</td>
+        			<td>        			
+        				<a class='btn btn-primary btn-options' href='javascript:;'><i class='fa fa-cog'></i> Options</a>	
+        				<div class='option_area' style="display: none">
+        					<?php 
+                                $type = $form["type"]?:"text";
+                                $types = base_path(CRUDBooster::typepath().$type.'/info.json');
+        						$types = file_get_contents($types);
+        						$types = json_decode($types);     
+
+        						if($types):
+        					?>
+
+                            @if($types->alert)
+                                <div class="alert alert-warning">
+                                    {!! $types->alert !!}
+                                </div>
+                            @endif                                                     
+
+        					<?php 
+        						if($types->attribute->required):
+        						foreach($types->attribute->required as $key=>$val):
+        							@$value = $form[$key];
+		                            if(is_object($val)):  
+
+                                        if($val->type && $val->type=='radio'):                                  
+        					?>
+                                            <div class="form-group">
+                                                <label>{{$key}}</label>
+                                                @foreach($val->enum as $enum)
+                                                    <input type="radio" name="option[{{$index}}][{{$key}}]" {{ ($enum == $value)?"checked":"" }} value="{{$enum}}"> {{$enum}}
+                                                @endforeach
+                                                
+                                            </div>
+
+                                        <?php else:?>
+
+            	        					<div class="form-group">
+            	        						<label>{{$key}}</label>
+            								    <input type="text" name="option[{{$index}}][{{$key}}]" placeholder="{{$val->placeholder}}" value="{{$value}}" class="form-control">
+            	        					</div>
+                                        <?php endif;?>
+                                    <?php else:?>
+
+                                    <div class="form-group">
+                                        <label>{{$key}}</label>
+                                        <input type="text" name="option[{{$index}}][{{$key}}]" placeholder="{{$val}}" value="{{$value}}" class="form-control">
+                                    </div>
+
+                                    <?php endif;?>
+        					<?php endforeach; endif;?>
+
+
+
+        					<?php 
+        						if($types->attribute->requiredOne):
+        						foreach($types->attribute->requiredOne as $key=>$val):
+        							@$value = $form[$key];
+        					?>
+	        					<div class="form-group">
+	        						<label>{{$key}}</label>
+	        						<input type="text" name="option[{{$index}}][{{$key}}]" placeholder="{{$val}}" value="{{$value}}" class="form-control">
+	        					</div>
+        					<?php endforeach; endif;?>
+
+        					<?php 
+        						if($types->attribute->optional):
+								foreach($types->attribute->optional as $key=>$val):
+									@$value = $form[$key];
+									
+        					?>
+	        					<div class="form-group">
+	        						<label>{{$key}}</label>
+									@if(is_object($val) && property_exists($val, 'type') && $val->type == 'textarea')
+										<textarea type="text" name="option[{{$index}}][{{$key}}]" placeholder="{{$val->placeholder}}" class="form-control">{{$value}}</textarea>
+									@else
+										<input type="text" name="option[{{$index}}][{{$key}}]" placeholder="{{$val}}" value="{{$value}}" class="form-control">
+									@endif
+								</div>
+        					<?php endforeach; endif;?>
+
+     
+        					<?php endif;?>
+        				</div>        				        				
+        			</td>   
+        			<td>
+        				<a href="javascript:void(0)" class="btn btn-info btn-plus"><i class='fa fa-plus'></i></a>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-delete"><i class='fa fa-trash'></i></a>
+                        <a href="javascript:void(0)" class="btn btn-success btn-up"><i class='fa fa-arrow-up'></i></a>
+                        <a href="javascript:void(0)" class="btn btn-success btn-down"><i class='fa fa-arrow-down'></i></a>
+        			</td>
+        		</tr>
+                <?php $index++;?>
+        		@endfor
+                @endif
 
         		<tr id='tr-sample' style="display: none">
         			<td><input type='text' placeholder="Input field label" onclick='showColumnSuggest(this)' onkeyup="showColumnSuggestLike(this)" class='form-control labels' name='label[]'/></td>

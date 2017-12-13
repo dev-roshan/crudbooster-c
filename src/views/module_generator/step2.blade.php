@@ -328,7 +328,36 @@
                             <a href="javascript:void(0)" class="btn btn-success btn-down"><i class='fa fa-arrow-down'></i></a>
                         </td>
                     </tr>                    
-                @endforeach          
+                @endforeach 
+                @else
+                @for($i=1;$i<=5;$i++)
+                <tr>
+                        <td><input value='{{$columns[$i]}}' type='text' name='column[]' onclick='showColumnSuggest(this)' onKeyUp='showColumnSuggestLike(this)' placeholder='Column Name' class='column form-control notfocus' /></td>
+                        <td><input value='{{$columns[$i]}}' type='text' name='name[]' onclick='showNameSuggest(this)' onKeyUp='showNameSuggestLike(this)' placeholder='Field Name' class='name form-control notfocus' value=''/></td>
+                        <td><input value='{{ @explode(",",$c["join"])[0] }}' type='text' name='join_table[]' onclick='showTable(this)' onKeyUp='showTableLike(this)' placeholder='Table Name' class='join_table form-control notfocus' value=''/></td>
+                        <td><input value='{{ @explode(",",$c["join"])[1] }}' type='text' name='join_field[]' onclick='showTableField(this)' onKeyUp='showTableFieldLike(this)' placeholder='Field Name Shown' class='join_field form-control notfocus' value=''/></td>
+                        <td><input type='text' name='callbackphp[]' class='form-control callbackphp notfocus' value='{{$c["callback_php"]}}' placeholder="Optional" /></td>
+                        <td><input value='{{$c["width"]?:0}}' type='number' name='width[]' class='form-control'/></td>
+                        <td>
+                            <select class='form-control is_image' name='is_image[]'>
+                                <option {{ (!$c['image'])?"selected":""}} value='0'>N</option>
+                                <option {{ ($c['image'])?"selected":""}} value='1'>Y</option>
+                            </select> 
+                        </td>
+                        <td>
+                            <select class='form-control is_download' name='is_download[]'>
+                                <option {{ (!$c['download'])?"selected":""}} value='0'>N</option>
+                                <option {{ ($c['download'])?"selected":""}} value='1'>Y</option>
+                            </select> 
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)" class="btn btn-info btn-plus"><i class='fa fa-plus'></i></a>
+                            <a href="javascript:void(0)" class="btn btn-danger btn-delete"><i class='fa fa-trash'></i></a>
+                            <a href="javascript:void(0)" class="btn btn-success btn-up"><i class='fa fa-arrow-up'></i></a>
+                            <a href="javascript:void(0)" class="btn btn-success btn-down"><i class='fa fa-arrow-down'></i></a>
+                        </td>
+                    </tr> 
+                @endfor    
                 @endif  
 
                 <tr id="tr-sample" style="display:none">

@@ -1015,15 +1015,25 @@ class CRUDBooster  {
 		public static function getTableColumns($table) {
 		    //$cols = DB::getSchemaBuilder()->getColumnListing($table);
 		    $table = CRUDBooster::parseSqlTable($table);
-		    $cols = collect(DB::select('SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = :database AND TABLE_NAME = :table', ['database'=>$table['database'], 'table'=>$table['table']]))->map(function($x){ return (array) $x; })->toArray();
-
-		    $result = array();
-		    $result = $cols;
-
-		    $new_result = array(); 
-		    foreach($result as $ro) {		          
-		        $new_result[] = $ro['COLUMN_NAME'];
-		    }
+			$schema= config('crudbooster.MAIN_DB_SCHEMA');
+			if(config('database.default')=='pgsql'){
+				$cols=collect(DB::select("SELECT * FROM information_schema.columns WHERE table_schema = '".$schema."' AND table_name   ='".$table['table']."'" ));
+				$new_result=array();
+				foreach($cols as $col){
+					$new_result[]=$col->column_name;
+				}
+			}
+			else{
+				$cols = collect(DB::select('SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = :database AND TABLE_NAME = :table', ['database'=>$table['database'], 'table'=>$table['table']]))->map(function($x){ return (array) $x; })->toArray();
+			
+					$result = array();
+					$result = $cols;
+					$new_result = array(); 
+					foreach($result as $ro) {		          
+						$new_result[] = $ro['COLUMN_NAME'];
+					}
+			}
+		    
 		    return $new_result;
 		}
 
