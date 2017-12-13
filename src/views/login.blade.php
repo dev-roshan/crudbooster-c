@@ -57,7 +57,7 @@
       </div><!-- /.login-logo -->      
       <div class="login-box-body">
 	  
-    		@if ( Session::get('message') !=null )
+    		@if ( Session::get('message') =='Thank You, See You Later !' )
         		<div class='alert alert-warning'>
         			{{ Session::get('message') }}
         		</div>	
