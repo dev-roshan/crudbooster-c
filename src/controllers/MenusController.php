@@ -154,8 +154,13 @@ use CRUDBooster;
 			$this->form[] = array("label"=>"Privileges","name"=>"cms_menus_privileges","type"=>"select2","select2_multiple"=>true,"datatable"=>"cms_privileges,name","relationship_table"=>"cms_menus_privileges","required"=>TRUE);
 			$this->form[] = array("label"=>"Name","name"=>"name","type"=>"text","required"=>TRUE,"validation"=>"required|min:3|max:255|alpha_spaces","placeholder"=>"You can only enter the letter only");
 			$this->form[] = array("label"=>"Type","name"=>"type","type"=>"radio","required"=>TRUE,'dataenum'=>['Module','Statistic','URL','Controller & Method','Route'],'value'=>'Module');			
-
+			if(config('database.default')=='pgsql'){
+			$this->form[] = array("label"=>"Module","name"=>"module_slug","type"=>"select","datatable"=>"cms_moduls,name","datatable_where"=>"is_protected = false","value"=>$id_module);
+			}
+			else{
 			$this->form[] = array("label"=>"Module","name"=>"module_slug","type"=>"select","datatable"=>"cms_moduls,name","datatable_where"=>"is_protected = 0","value"=>$id_module);
+			}
+			
 			$this->form[] = array("label"=>"Statistic","name"=>"statistic_slug","type"=>"select","datatable"=>"cms_statistics,name","style"=>"display:none","value"=>$id_statistic);
 
 			$this->form[] = array("label"=>"Value","name"=>"path","type"=>"text",'help'=>'If you select type controller, you can fill this field with controller name, you may include the method also','placeholder'=>'NameController or NameController@methodName',"style"=>"display:none");

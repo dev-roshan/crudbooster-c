@@ -688,7 +688,13 @@ class CRUDBooster  {
 			if(!$table['table']) throw new \Exception("parseSqlTable can't determine the table");							
 			$query="";
 			if(config('database.default')=='pgsql'){
-                $query = "select * from information_schema.key_column_usage WHERE TABLE_NAME = '$table[table]'";
+                $query =
+				"SELECT a . attname as keys, format_type(a . atttypid, a . atttypmod) as data_type
+				FROM pg_index i
+				JOIN pg_attribute a ON a . attrelid = i . indrelid
+				and a . attnum = ANY(i . indkey)
+				WHERE i . indrelid = '$table[table]'::regclass
+				and i . indisprimary";
 				} 
 			else {
 				$query = "select * from information_schema.COLUMNS where TABLE_SCHEMA = '$table[database]' and TABLE_NAME = '$table[table]' and COLUMN_KEY = 'PRI'";

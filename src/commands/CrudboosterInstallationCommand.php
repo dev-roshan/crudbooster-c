@@ -33,6 +33,7 @@ class CrudboosterInstallationCommand extends Command
     {
         //copying basecbcontroller
         copy('vendor/crudbooster/custom/src/controllers/BaseCBController.php', 'app/Http/Controllers/BaseCBController.php');
+		copy('vendor/crudbooster/custom/src/controllers/LogsCBController.php', 'app/Http/Controllers/LogsCBController.php');
         $this->printHeader();
         $this->checkRequirements();
         $this->info('Installing: ');
