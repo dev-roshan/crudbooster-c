@@ -54,7 +54,7 @@
 									
 									}
 								?>
-							<div class='form-group {{$cmp_class}}' id='form-group-{{$name}}' style="{{@$form['style']}}">
+							<div class='form-group custom-wysiwyg {{$cmp_class}}' id='form-group-{{$name}}' style="{{@$form['style']}}">
 								<label class='{{$label_width}}'>{{$form['label']}}</label>
 
 								<div class="{{$col_width}}">

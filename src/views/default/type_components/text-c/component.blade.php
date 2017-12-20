@@ -18,7 +18,7 @@ if(strlen($cmp_ratio) >= 1){
     
 }
 ?>
-<div class='{{$cmp_class}} form-group {{$header_group_class}} {{ ($errors->first($name))?"has-error":"" }}' id='form-group-{{$name}}'
+<div class='{{$cmp_class}} form-group custom-text {{$header_group_class}} {{ ($errors->first($name))?"has-error":"" }}' id='form-group-{{$name}}'
 style="{{@$form['style']}}">
     <label class='{{$label_width}}'>{{$form['label']}} {!!($required)?"<span class='text-danger' title='This field is required'>*</span>":"" !!}</label>
     <div class="{{$col_width}}">
