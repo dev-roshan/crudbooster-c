@@ -19,7 +19,7 @@ if(strlen($cmp_ratio) >= 1){
 }
 ?>
 
-<div class='form-group form-datepicker {{$cmp_class}} custom-date-n {{$header_group_class}} {{ ($errors->first($name))?"has-error":"" }}' id='form-group-{{$name}}' style="{{@$form['style']}}">
+<div class='form-group form-datepicker {{$cmp_class}} custom-date {{$header_group_class}} {{ ($errors->first($name))?"has-error":"" }}' id='form-group-{{$name}}' style="{{@$form['style']}}">
     <label class='{{$label_width}}'>{{$form['label']}} {!!($required)?"<span class='text-danger' title='This field is required'>*</span>":"" !!}</label>
 
     <div class="{{$col_width}}">

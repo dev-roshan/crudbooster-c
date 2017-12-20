@@ -1,8 +1,12 @@
-.custom-select{
+.custom-select2{
     height: 58px;
     margin-bottom: 15px;
 }
 .custom-date{
+    margin-bottom: 15px;
+    height: 58px;
+}
+.custom-radio{
     margin-bottom: 15px;
     height: 58px;
 }
