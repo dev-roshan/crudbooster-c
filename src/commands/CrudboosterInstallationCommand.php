@@ -36,7 +36,7 @@ class CrudboosterInstallationCommand extends Command
         //copying logcbcontroller
         copy('vendor/crudbooster/custom/src/controllers/LogsCBController.php', 'app/Http/Controllers/LogsCBController.php');
         // copying custom css
-        copy('vendor/crudbooster/custom/src/assets/custom.css', 'css/custom.css');
+        copy('vendor/crudbooster/custom/src/assets/custom.css', 'public/css/custom.css');
         
         $this->printHeader();
         $this->checkRequirements();
