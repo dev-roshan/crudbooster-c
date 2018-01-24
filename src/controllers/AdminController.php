@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use CRUDBooster;
+use Carbon\Carbon;
+
 
 class AdminController extends CBController
 {
@@ -43,6 +45,40 @@ class AdminController extends CBController
 		} else {
 			echo "<script>alert('" . trans('crudbooster.alert_password_wrong') . "');history.go(-1);</script>";
 		}
+	}
+
+	public function getRegister(){
+	    return view('crudbooster::register');
+	}
+
+	public function postRegister(){
+		$validator = Validator::make(Request::all(),
+			[
+				'name'=>'required|string|unique:cms_users',
+				'email'=>'required|string|email|unique:cms_users',
+				'password'=>'required|string|min:6|confirmed'
+			]
+		);
+
+		if ($validator->fails())
+		{
+			$message = $validator->errors()->all();
+			return redirect()->back()->with(['message'=>implode(', ',$message),'message_type'=>'danger']);
+		}
+
+		$id 		= DB::table(config('crudbooster.USER_TABLE'))->max('id') + 1;
+		$name 		= Request::input("name");
+		$email 		= Request::input("email");
+		$password 	= Request::input("password");
+		$created_at = Carbon::now();
+
+
+		DB::table(config('crudbooster.USER_TABLE'))->insert(
+    	['id'=>$id, 'name'=>$name, 'email' => $email, 'password'=>bcrypt($password), 'id_cms_privileges' => 3,'created_at'=>$created_at]
+		);
+
+		return view('crudbooster::login');
+
 	}
 
 	public function getLogin()
