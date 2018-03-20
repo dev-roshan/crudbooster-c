@@ -42,7 +42,8 @@
       if($value=='') {
       $value = "http://placehold.it/50x50&text=NO+IMAGE";
       }
-      $pic = (strpos($value,'http://')!==FALSE)?$value:asset($value);
+      //$pic = (strpos($value,'http://')!==FALSE)?$value:asset($value);
+	  $pic=$value;
       $pic_small = $pic;
       if(Request::input('fileformat')=='pdf') {
         echo "<td><a data-lightbox='roadtrip' rel='group_{{$table}}' title='$col[label]: $title' href='".$pic."'><img class='img-circle' width='40px' height='40px' src='".$pic_small."'/></a></td>";

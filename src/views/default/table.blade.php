@@ -175,9 +175,9 @@
 
                   </form><!--END FORM TABLE-->
 
-                    <div class="pull-right">
+                  <!--  <div class="pull-right">
                   <p class="label label-success" style="font-weight: bold;font-size: 16px;">Number of records: {{$table_row_count}}</p>
-              </div>
+              </div>-->
 
             <p>{!! urldecode(str_replace("/?","?",$result->appends(Request::all())->render())) !!}</p>
 
