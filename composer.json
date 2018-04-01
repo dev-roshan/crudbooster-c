@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-          "crocodicstudio\\crudbooster\\": "src/"
+          "crocodicstudio\\custom\\": "src/"
         }
     },
     "extra": {
