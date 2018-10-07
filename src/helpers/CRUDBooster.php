@@ -37,7 +37,7 @@ class CRUDBooster  {
 			else return false;
 		}	
 
-		public static function first($table,$id) {
+		public static function first($table,$id,$schema="public") {
 			$table = self::parseSqlTable($table)['table'];
 			if(is_array($id)) {
 				$first = DB::table($table);
@@ -46,7 +46,10 @@ class CRUDBooster  {
 				}
 				return $first->first();
 			}else{
-				$pk = self::pk($table);
+				if(config('database.default')=='pgsql')
+					$pk = self::pk($table, $schema);
+				else
+					$pk = self::pk($table);
 				return DB::table($table)->where($pk,$id)->first();
 			}
 		}
@@ -673,11 +676,14 @@ class CRUDBooster  {
 			}
 		}
 
-		public static function pk($table) {
-			return self::findPrimaryKey($table);
+		public static function pk($table, $schema = "public") {
+			if(config('database.default')=='pgsql')
+				return self::findPrimaryKey($table, $schema);
+			else
+				return self::findPrimaryKey($table);
 		}
 
-		public static function findPrimaryKey($table) {
+		public static function findPrimaryKey($table, $schema = "public") {
 			if(!$table) return 'id';
 			
 			if(self::getCache('table_'.$table,'primary_key')) {
@@ -688,6 +694,10 @@ class CRUDBooster  {
 			if(!$table['table']) throw new \Exception("parseSqlTable can't determine the table");							
 			$query="";
 			if(config('database.default')=='pgsql'){
+				$s = "";
+				if($schema != "public"){
+					DB::statement("SET search_path TO $schema, public");
+				}
                 $query =
 				"SELECT a . attname as keys, format_type(a . atttypid, a . atttypmod) as data_type
 				FROM pg_index i
@@ -1117,7 +1127,7 @@ class CRUDBooster  {
 		        file_put_contents($path.'Api'.$controller_name.'Controller.php', $php);
 		}
 
-		public static function generateController($table,$name=NULL) {  
+		public static function generateController($table, $name=NULL) {  
 	        
 	        $exception          = ['id','created_at','updated_at','deleted_at'];
 	        $image_candidate    = explode(',',config('crudbooster.IMAGE_FIELDS_CANDIDATE'));

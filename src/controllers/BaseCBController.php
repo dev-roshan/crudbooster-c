@@ -28,7 +28,7 @@ class BaseCBController extends Controller
     public $is_edit = false;
     public $is_delete = false;
     public $is_report = false;
-    // public $is_dashboard = false;
+    public $is_dashboard = false;
     public $report_name = "";
     public $data_inputan;
     public $columns_table;
@@ -48,6 +48,7 @@ class BaseCBController extends Controller
     public $limit = 20;
     public $global_privilege = false;
     public $show_numbering = true;
+    public $schema = "public";
 
     public $alert = array();
     public $index_button = array();
@@ -129,7 +130,7 @@ class BaseCBController extends Controller
         $this->addCommonAssets();
         $this->checkHideForm();
 
-        $this->primary_key = CB::pk($this->table);
+        $this->primary_key = CB::pk($this->table, $this->schema);
         $this->columns_table = $this->col;
         $this->data_inputan = $this->form;
         $this->data['pk'] = $this->primary_key;
@@ -201,7 +202,7 @@ class BaseCBController extends Controller
             return "id";
         else if ($alias == ""
             || $table == $alias)
-            return CB::pk($table);
+            return CB::pk($table, $this->schema);
         else
             return "id";
 
@@ -231,7 +232,7 @@ class BaseCBController extends Controller
         }
 
         if (Request::get('parent_table')) {
-            $parentTablePK = CB::pk(g('parent_table'));
+            $parentTablePK = CB::pk(g('parent_table'), $this->schema);
             $data['parent_table'] = DB::table(Request::get('parent_table'))->where($parentTablePK, Request::get('parent_id'))->first();
             if (Request::get('foreign_key')) {
                 $data['parent_field'] = Request::get('foreign_key');
@@ -321,7 +322,7 @@ class BaseCBController extends Controller
                 $join_exp = explode(',', $join);
 
                 $join_table = $join_exp[0];
-                $joinTablePK = CB::pk($join_table);
+                $joinTablePK = CB::pk($join_table, $this->schema);
                 $join_column = $join_exp[1];
                 $join_alias = str_replace(".", "_", $join_table);
 
@@ -348,7 +349,7 @@ class BaseCBController extends Controller
                 $columns_table[$index]['field_raw'] = $join_column;
 
                 @$join_table1 = $join_exp[2];
-                @$joinTable1PK = CB::pk($join_table1);
+                @$joinTable1PK = CB::pk($join_table1, $this->schema);
                 @$join_column1 = $join_exp[3];
                 @$join_alias1 = $join_table1;
 
@@ -724,7 +725,7 @@ class BaseCBController extends Controller
         $columns = explode(",", $columns);
 
         $table = CRUDBooster::parseSqlTable($table)['table'];
-        $tablePK = CB::pk($table);
+        $tablePK = CB::pk($table, $this->schema);
         $result = DB::table($table);
 
         if (Request::get('q')) {
@@ -756,7 +757,7 @@ class BaseCBController extends Controller
         $column = Request::get('column');
         $value = Request::get('value');
         $id = Request::get('id');
-        $tablePK = CB::pk($table);
+        $tablePK = CB::pk($table, $this->schema);
         DB::table($table)->where($tablePK, $id)->update([$column => $value]);
 
         return redirect()->back()->with(['message_type' => 'success', 'message' => trans('crudbooster.alert_delete_data_success')]);
@@ -770,7 +771,7 @@ class BaseCBController extends Controller
         $format = Request::get('format');
 
         $table1 = (Request::get('table1')) ? : $this->table;
-        $table1PK = CB::pk($table1);
+        $table1PK = CB::pk($table1, $this->schema);
         $column1 = (Request::get('column1')) ? : $this->title_field;
 
         @$table2 = Request::get('table2');
@@ -804,7 +805,7 @@ class BaseCBController extends Controller
             }
 
             if ($table2 && $column2) {
-                $table2PK = CB::pk($table2);
+                $table2PK = CB::pk($table2, $this->schema);
                 $rows->join($table2, $table2 . '.' . $table2PK, '=', $table1 . '.' . $column1);
                 $columns = CRUDBooster::getTableColumns($table2);
                 foreach ($columns as $col) {
@@ -815,7 +816,7 @@ class BaseCBController extends Controller
             }
 
             if ($table3 && $column3) {
-                $table3PK = CB::pk($table3);
+                $table3PK = CB::pk($table3, $this->schema);
                 $rows->join($table3, $table3 . '.' . $table3PK, '=', $table2 . '.' . $column2);
                 $columns = CRUDBooster::getTableColumns($table3);
                 foreach ($columns as $col) {
@@ -1049,7 +1050,7 @@ class BaseCBController extends Controller
                     if ($ro['datatable'] != '') {
                         $table_checkbox = explode(',', $ro['datatable'])[0];
                         $field_checkbox = explode(',', $ro['datatable'])[1];
-                        $table_checkbox_pk = CB::pk($table_checkbox);
+                        $table_checkbox_pk = CB::pk($table_checkbox, $this->schema);
                         $data_checkbox = DB::table($table_checkbox)->whereIn($table_checkbox_pk, $inputdata)->pluck($field_checkbox)->toArray();
                         $this->arr[$name] = implode(";", $data_checkbox);
                     } else {
@@ -1183,7 +1184,7 @@ class BaseCBController extends Controller
                     DB::table($ro['relationship_table'])->where($foreignKey, $id)->delete();
 
                     if ($inputdata) {
-                        $relationship_table_pk = CB::pk($ro['relationship_table']);
+                        $relationship_table_pk = CB::pk($ro['relationship_table'], $this->schema);
                         foreach ($inputdata as $input_id) {
                             DB::table($ro['relationship_table'])->insert([
                                 $relationship_table_pk => CRUDBooster::newId($ro['relationship_table']),
@@ -1206,7 +1207,7 @@ class BaseCBController extends Controller
 
                     if ($inputdata) {
                         foreach ($inputdata as $input_id) {
-                            $relationship_table_pk = CB::pk($row['relationship_table']);
+                            $relationship_table_pk = CB::pk($row['relationship_table'], $this->schema);
                             DB::table($ro['relationship_table'])->insert([
                                 $relationship_table_pk => CRUDBooster::newId($ro['relationship_table']),
                                 $foreignKey => $id,
@@ -1331,7 +1332,7 @@ class BaseCBController extends Controller
 
                     if ($inputdata) {
                         foreach ($inputdata as $input_id) {
-                            $relationship_table_pk = CB::pk($ro['relationship_table']);
+                            $relationship_table_pk = CB::pk($ro['relationship_table'], $this->schema);
                             DB::table($ro['relationship_table'])->insert([
                                 $relationship_table_pk => CRUDBooster::newId($ro['relationship_table']),
                                 $foreignKey => $id,
@@ -1355,7 +1356,7 @@ class BaseCBController extends Controller
 
                     if ($inputdata) {
                         foreach ($inputdata as $input_id) {
-                            $relationship_table_pk = CB::pk($ro['relationship_table']);
+                            $relationship_table_pk = CB::pk($ro['relationship_table'], $this->schema);
                             DB::table($ro['relationship_table'])->insert([
                                 $relationship_table_pk => CRUDBooster::newId($ro['relationship_table']),
                                 $foreignKey => $id,
@@ -1378,7 +1379,7 @@ class BaseCBController extends Controller
 
                 DB::table($childtable)->where($fk, $id)->delete();
                 $lastId = CRUDBooster::newId($childtable);
-                $childtablePK = CB::pk($childtable);
+                $childtablePK = CB::pk($childtable, $this->schema);
 
                 for ($i = 0; $i <= $count_input_data; $i++) {
 
@@ -1686,7 +1687,7 @@ class BaseCBController extends Controller
             }
 
             $this->hook_before_delete($id_selected);
-            $tablePK = CB::pk($this->table);
+            $tablePK = CB::pk($this->table, $this->schema);
             if (CRUDBooster::isColumnExists($this->table, 'deleted_at')) {
 
                 DB::table($this->table)->whereIn($tablePK, $id_selected)->update(['deleted_at' => date('Y-m-d H:i:s')]);
