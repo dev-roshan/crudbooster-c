@@ -65,4 +65,3 @@
 									<p class='help-block'>{{ @$form['help'] }}</p>
 								</div>
 						</div>
-						$class=@$form['class'];
