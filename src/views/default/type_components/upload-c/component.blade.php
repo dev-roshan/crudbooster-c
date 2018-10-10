@@ -17,6 +17,7 @@ if(strlen($cmp_ratio) >= 1){
     }
     
 }
+$class=@$form['class'];
 ?>
 
 @if($value)
@@ -49,7 +50,7 @@ if(strlen($cmp_ratio) >= 1){
 				@endif
 			@endif				
 			@if(!$value)
-			<input type='file' id="{{$name}}" title="{{$form['label']}}" class="form-control fileupload" {{$required}} {{$readonly}} {{$disabled}} name="{{$name}}"/>							
+			<input type='file' id="{{$name}}" title="{{$form['label']}}" class="form-control fileupload {{$class}}" {{$required}} {{$readonly}} {{$disabled}} name="{{$name}}"/>							
 			<p class='help-block'>{{ @$form['help'] }}</p>
 			@else
 			<p class='text-muted'><em>{{trans("crudbooster.notice_delete_file_upload")}}</em></p>

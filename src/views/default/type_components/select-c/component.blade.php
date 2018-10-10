@@ -4,6 +4,7 @@
 		$parent_select 	= (count(explode(",",$form['parent_select'])) > 1)?explode(",",$form['parent_select']):$form['parent_select'];
 		$parent 		= is_array($parent_select)?$parent_select[0]:$parent_select;
 		$add_field	 	= is_array($parent_select)?$parent_select[1]:'';
+	$class=@$form['class'];
 		
 	?>
 	@push('bottom')
@@ -87,7 +88,7 @@ if(strlen($cmp_ratio) >= 1){
 		<label class='{{$label_width}}'>{{$form['label']}} {!!($required)?"<span class='text-danger' title='This field is required'>*</span>":"" !!}</label>			
 
 		<div class="{{$col_width}}">									
-		<select class='form-control custom-select' id="{{$name}}" data-value='{{$value}}' {{$required}} {!!$placeholder!!} {{$readonly}} {{$disabled}} name="{{$name}}">
+		<select class='form-control custom-select {{$class}}' id="{{$name}}" data-value='{{$value}}' {{$required}} {!!$placeholder!!} {{$readonly}} {{$disabled}} name="{{$name}}">
 			<option value=''>{{$default}}</option>
 			<?php 	
 				if(!$form['parent_select']) {

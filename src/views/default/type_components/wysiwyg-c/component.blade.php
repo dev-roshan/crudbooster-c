@@ -53,13 +53,16 @@
 									}
 									
 									}
+								$class=@$form['class'];
+
 								?>
 							<div class='form-group custom-wysiwyg {{$cmp_class}}' id='form-group-{{$name}}' style="{{@$form['style']}}">
 								<label class='{{$label_width}}'>{{$form['label']}}</label>
 
 								<div class="{{$col_width}}">
-									<textarea id='textarea_{{$name}}' id="{{$name}}" {{$required}} {{$readonly}} {{$disabled}} name="{{$form['name']}}" class='form-control' rows='5'>{{ $value }}</textarea>
+									<textarea id='textarea_{{$name}}' id="{{$name}}" {{$required}} {{$readonly}} {{$disabled}} name="{{$form['name']}}" class='form-control {{$class}}' rows='5'>{{ $value }}</textarea>
 									<div class="text-danger">{{ $errors->first($name) }}</div>
 									<p class='help-block'>{{ @$form['help'] }}</p>
 								</div>
 						</div>
+						$class=@$form['class'];

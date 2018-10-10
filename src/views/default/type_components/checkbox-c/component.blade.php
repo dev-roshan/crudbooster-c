@@ -17,7 +17,7 @@ if(strlen($cmp_ratio) >= 1){
     }
     
 }
-
+$class=@$form['cmp-class'];
 ?>
 
 
@@ -44,7 +44,7 @@ if(strlen($cmp_ratio) >= 1){
 									?>
 									<div class="checkbox {{$disabled}}">
 									  <label>
-									    <input type="checkbox" {{$disabled}} {{$checked}} name="{{$name}}[]" value="{{$val}}"> {{$label}}								    
+									    <input class ="{{$class}}" type="checkbox" {{$disabled}} {{$checked}} name="{{$name}}[]" value="{{$val}}"> {{$label}}								    
 									  </label>
 									</div>
 								@endforeach
@@ -90,7 +90,7 @@ if(strlen($cmp_ratio) >= 1){
 												echo "
 												<div data-val='$val' class='checkbox $disabled'>
 												  <label>
-												    <input type='checkbox' $disabled $checked name='".$name."[]' value='".$d->id."'> ".$d->{$datatable_field}."								    
+												    <input type='checkbox' class ='{{$class}}' $disabled $checked name='".$name."[]' value='".$d->id."'> ".$d->{$datatable_field}."								    
 												  </label>
 												</div>";
 											}
@@ -105,7 +105,7 @@ if(strlen($cmp_ratio) >= 1){
 												echo "
 												<div data-val='$val' class='checkbox $disabled'>
 												  <label>
-												    <input type='checkbox' $disabled $checked name='".$name."[]' value='".$d->id."'> ".$val." 								    
+												    <input type='checkbox' class ='{{$class}}' $disabled $checked name='".$name."[]' value='".$d->id."'> ".$val." 								    
 												  </label>
 												</div>";
 											}
@@ -125,7 +125,7 @@ if(strlen($cmp_ratio) >= 1){
 																	echo "
 												<div data-val='$val' class='checkbox $disabled'>
 												  <label>
-												    <input type='checkbox' $disabled $checked name='".$name."[]' value='$q->value'> ".$q->label." 								    
+												    <input type='checkbox' class ='{{$class}}' $disabled $checked name='".$name."[]' value='$q->value'> ".$q->label." 								    
 												  </label>
 												</div>";
 													}

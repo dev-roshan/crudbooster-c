@@ -17,6 +17,7 @@ if(strlen($cmp_ratio) >= 1){
     }
     
 }
+$class=@$form['class'];
 ?>
 
 <div class='form-group form-datepicker {{$cmp_class}} custom-date {{$header_group_class}} {{ ($errors->first($name))?"has-error":"" }}' id='form-group-{{$name}}' style="{{@$form['style']}}">
@@ -25,7 +26,7 @@ if(strlen($cmp_ratio) >= 1){
     <div class="{{$col_width}}">
     <div class="input-group">  								
         <span class="input-group-addon open-datetimepicker"><a><i class='fa fa-calendar '></i></a></span>
-        <input type='text' autocomplete="off" title="{{$form['label']}}" {{$required}} {{$readonly}} {!!$placeholder!!} {{$disabled}} class='form-control notfocus nepaliDatePicker' name="{{$name}}" id="{{$name}}" value='{{$value}}'/>						
+        <input type='text' autocomplete="off" title="{{$form['label']}}" {{$required}} {{$readonly}} {!!$placeholder!!} {{$disabled}} class='form-control {{$class}} notfocus nepaliDatePicker' name="{{$name}}" id="{{$name}}" value='{{$value}}'/>						
     </div>
     <div class="text-danger">{!! $errors->first($name)?"<i class='fa fa-info-circle'></i> ".$errors->first($name):"" !!}</div>
     <p class='help-block'>{{ @$form['help'] }}</p>

@@ -17,6 +17,7 @@ if(strlen($cmp_ratio) >= 1){
     }
     
 }
+$class=@$form['class'];
 ?>
 
 
@@ -47,7 +48,7 @@ if(strlen($cmp_ratio) >= 1){
 									?>
 									<div class=" {{$disabled}}">
 									  <label class='radio-inline'>
-									    <input type="radio" {{$disabled}} {{$checked}} name="{{$name}}" value="{{$val}}"> {{$label}}								    
+									    <input class='{{$class}}' type="radio" {{$disabled}} {{$checked}} name="{{$name}}" value="{{$val}}"> {{$label}}								    
 									  </label>
 									</div>
 								@endforeach
@@ -96,7 +97,7 @@ if(strlen($cmp_ratio) >= 1){
 											echo "
 											<div data-val='$val' class='input-radio-wrapper $disabled'>
 											  <label class='radio-inline'>
-											    <input type='radio' $disabled $checked name='".$name."' value='".$d->id."'> ".$val." 								    
+											    <input type='radio' class='{{$class}}' $disabled $checked name='".$name."' value='".$d->id."'> ".$val." 								    
 											  </label>
 											</div>";												
 										}
@@ -109,7 +110,7 @@ if(strlen($cmp_ratio) >= 1){
 														$checked = ($value == $q->value)?"checked":"";
 														echo "<div data-val='$val' class=' $disabled'>
 																<label class='radio-inline'>
-																	<input type='radio' $disabled $checked name='".$name."' value='$q->value'> ".$q->label."								    
+																	<input class='{{$class}}' type='radio' $disabled $checked name='".$name."' value='$q->value'> ".$q->label."								    
 																</label>
 																</div>";
 													}

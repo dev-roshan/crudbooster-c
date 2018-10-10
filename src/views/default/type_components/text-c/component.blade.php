@@ -17,12 +17,14 @@ if(strlen($cmp_ratio) >= 1){
     }
     
 }
+$class=@$form['class'];
+
 ?>
 <div class='{{$cmp_class}} form-group custom-text {{$header_group_class}} {{ ($errors->first($name))?"has-error":"" }}' id='form-group-{{$name}}'
 style="{{@$form['style']}}">
     <label class='{{$label_width}}'>{{$form['label']}} {!!($required)?"<span class='text-danger' title='This field is required'>*</span>":"" !!}</label>
     <div class="{{$col_width}}">
-        <input type='text' title="{{$form['label']}}" class="{{$col_width}}" style="height:33px"
+        <input type='text' title="{{$form['label']}}" class="{{$col_width}} {{$class}}" style="height:33px"
                 {{$required}} {{$readonly}} {!!$placeholder!!} {{$disabled}} {{$validation['max']?"maxlength=$validation[max]":""}} class='form-control'
                 name="{{$name}}" id="{{$name}}" value='{{$value}}'/>
 

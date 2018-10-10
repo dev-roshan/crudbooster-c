@@ -17,6 +17,8 @@ if(strlen($cmp_ratio) >= 1){
     }
     
 }
+$class=@$form['class'];
+
 ?>
 
 
@@ -24,7 +26,7 @@ if(strlen($cmp_ratio) >= 1){
 							<label class='{{$label_width}}'>{{$form['label']}} {!!($required)?"<span class='text-danger' title='This field is required'>*</span>":"" !!}</label>
 
 							<div class="{{$col_width}}">
-							<input type='number' step="{{($form['step'])?:'1'}}" title="{{$form['label']}}" {{$required}} {{$readonly}} {!!$placeholder!!} {{$disabled}} {{$validation['min']?"min=$validation[min]":""}} {{$validation['max']?"max=$validation[max]":""}} class='form-control' name="{{$name}}" id="{{$name}}" value='{{$value}}'/>
+							<input type='number' step="{{($form['step'])?:'1'}}" title="{{$form['label']}}" {{$required}} {{$readonly}} {!!$placeholder!!} {{$disabled}} {{$validation['min']?"min=$validation[min]":""}} {{$validation['max']?"max=$validation[max]":""}} class='form-control {{$class}}' name="{{$name}}" id="{{$name}}" value='{{$value}}'/>
 							<div class="text-danger">{!! $errors->first($name)?"<i class='fa fa-info-circle'></i> ".$errors->first($name):"" !!}</div>
 							<p class='help-block'>{{ @$form['help'] }}</p>
 							</div>
