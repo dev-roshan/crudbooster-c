@@ -302,11 +302,15 @@
             <tbody>
                 @if($cb_col)
                 @foreach($cb_col as $c)
+                    <?php
+                    $value0=explode(",",$c["join"])[0];
+                    $value1=explode(",",$c["join"])[1];
+                    ?>
                     <tr>
                         <td><input value='{{$c["label"]}}' type='text' name='column[]' onclick='showColumnSuggest(this)' onKeyUp='showColumnSuggestLike(this)' placeholder='Column Name' class='column form-control notfocus' value=''/></td>
                         <td><input value='{{$c["name"]}}' type='text' name='name[]' onclick='showNameSuggest(this)' onKeyUp='showNameSuggestLike(this)' placeholder='Field Name' class='name form-control notfocus' value=''/></td>
-                        <td><input value='{{ @explode(",",$c["join"])[0] }}' type='text' name='join_table[]' onclick='showTable(this)' onKeyUp='showTableLike(this)' placeholder='Table Name' class='join_table form-control notfocus' value=''/></td>
-                        <td><input value='{{ @explode(",",$c["join"])[1] }}' type='text' name='join_field[]' onclick='showTableField(this)' onKeyUp='showTableFieldLike(this)' placeholder='Field Name Shown' class='join_field form-control notfocus' value=''/></td>
+                        <td><input value='{{ $value0 }}' type='text' name='join_table[]' onclick='showTable(this)' onKeyUp='showTableLike(this)' placeholder='Table Name' class='join_table form-control notfocus' value=''/></td>
+                        <td><input value='{{ $value1 }}' type='text' name='join_field[]' onclick='showTableField(this)' onKeyUp='showTableFieldLike(this)' placeholder='Field Name Shown' class='join_field form-control notfocus' value=''/></td>
                         <td><input type='text' name='callbackphp[]' class='form-control callbackphp notfocus' value='{{$c["callback_php"]}}' placeholder="Optional" /></td>
                         <td><input value='{{$c["width"]?:0}}' type='number' name='width[]' class='form-control'/></td>
                         <td>
@@ -334,8 +338,8 @@
                 <tr>
                         <td><input value='{{$columns[$i]}}' type='text' name='column[]' onclick='showColumnSuggest(this)' onKeyUp='showColumnSuggestLike(this)' placeholder='Column Name' class='column form-control notfocus' /></td>
                         <td><input value='{{$columns[$i]}}' type='text' name='name[]' onclick='showNameSuggest(this)' onKeyUp='showNameSuggestLike(this)' placeholder='Field Name' class='name form-control notfocus' value=''/></td>
-                        <td><input value='{{ @explode(",",$c["join"])[0] }}' type='text' name='join_table[]' onclick='showTable(this)' onKeyUp='showTableLike(this)' placeholder='Table Name' class='join_table form-control notfocus' value=''/></td>
-                        <td><input value='{{ @explode(",",$c["join"])[1] }}' type='text' name='join_field[]' onclick='showTableField(this)' onKeyUp='showTableFieldLike(this)' placeholder='Field Name Shown' class='join_field form-control notfocus' value=''/></td>
+                        <td><input value='{{ $value0 }}' type='text' name='join_table[]' onclick='showTable(this)' onKeyUp='showTableLike(this)' placeholder='Table Name' class='join_table form-control notfocus' value=''/></td>
+                        <td><input value='{{ $value1 }}' type='text' name='join_field[]' onclick='showTableField(this)' onKeyUp='showTableFieldLike(this)' placeholder='Field Name Shown' class='join_field form-control notfocus' value=''/></td>
                         <td><input type='text' name='callbackphp[]' class='form-control callbackphp notfocus' value='{{$c["callback_php"]}}' placeholder="Optional" /></td>
                         <td><input value='{{$c["width"]?:0}}' type='number' name='width[]' class='form-control'/></td>
                         <td>
