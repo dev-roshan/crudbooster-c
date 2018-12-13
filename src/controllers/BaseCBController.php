@@ -96,6 +96,9 @@ class BaseCBController extends Controller
     public function addCommonAssets()
     {
         // array_push($this->load_css, asset("css/custom.css?".now()));
+        // array_push($this->load_css, asset("css/selectize.bootstrap3.css"));
+        // array_push($this->load_js, asset("js/cb_combo_filter.js"));
+        // array_push($this->load_js, asset("js/selectize.js"));
         // array_push($this->load_js, asset("js/nepali.datepicker.v2.2.min.js"));
 
     }
