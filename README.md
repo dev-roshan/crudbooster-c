@@ -23,7 +23,7 @@ CRUDBooster is CRUD Generator for laravel, with the most important features web 
 ## How To Install
 1. Open the terminal, navigate to your project directory.
 ```php
-$ composer require crocodicstudio/custom
+$ composer require crudbooster/custom
 ```
 
 2. Add the following class, to "providers" array in the file **config/app.php**

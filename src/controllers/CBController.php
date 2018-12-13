@@ -76,10 +76,19 @@ class CBController extends Controller {
 	public $hide_form			  = array();
 	public $index_return 		  = FALSE; //for export
 
+	public function addCommonAssets()
+    {
+        array_push($this->load_css, asset("vendor/crudbooster/assets/css/custom.css?".now()));
+        array_push($this->load_css, asset("vendor/crudbooster/assets/css/selectize.bootstrap3.css"));
+        array_push($this->load_js, asset("vendor/crudbooster/assets/js/cb_combo_filter.js"));
+        array_push($this->load_js, asset("vendor/crudbooster/assets/js/selectize.js"));
+        array_push($this->load_js, asset("vendor/crudbooster/assets/js/nepali.datepicker.v2.2.min.js"));
 
+	}
+	
 	public function cbLoader() {
 		$this->cbInit();
-
+		$this->addCommonAssets();
 		$this->checkHideForm();
 
 		$this->primary_key 					 = CB::pk($this->table);

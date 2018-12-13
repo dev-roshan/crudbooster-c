@@ -386,7 +386,7 @@
                             $combocount++;
                             $combonames=$combonames.",".$col['name'];
                             ?>
-                            @include("vendor_default.filter_combo")
+                            @include("crudbooster::default.filter_combo")
                           @endif
                       </div>
                       <?php endforeach;?>       
