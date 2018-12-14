@@ -83,6 +83,7 @@ class CBController extends Controller {
         array_push($this->load_js, asset("vendor/crudbooster/assets/js/cb_combo_filter.js"));
         array_push($this->load_js, asset("vendor/crudbooster/assets/js/selectize.js"));
         array_push($this->load_js, asset("vendor/crudbooster/assets/js/nepali.datepicker.v2.2.min.js"));
+        array_push($this->load_js, asset("vendor/crudbooster/assets/js/nepalidateConvertorCustom.js"));
 
 	}
 	
