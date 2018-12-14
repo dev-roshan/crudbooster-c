@@ -9,7 +9,7 @@
         "crud",
         "generator"
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "authors": [
         {
