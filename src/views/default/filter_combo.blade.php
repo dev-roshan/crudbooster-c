@@ -20,7 +20,7 @@
 </div> 
 <div class='col-sm-3' id="cbfiltercombo">
 
-<select id='{{$reqname}}' name='filter_column[{{$name}}][value]' class="filter-combo form-control">
+<select id='{{$reqname}}' name='filter_column[{{$name}}][value]' class="filter-combo">
 
     <!-- <select id='{{$col["name"]}}' name='filter_column[mst_client_products.client_id][value]' class='filter_combo'> -->
         <option value="">Select {{ $col['name'] }}</option>
